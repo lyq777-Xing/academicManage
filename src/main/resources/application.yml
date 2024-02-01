@@ -1,0 +1,28 @@
+server:
+  port: 8889
+  servlet:
+    context-path: /lyq
+spring:
+  profiles:
+    active: jdbc
+  jackson:
+    date-format: java.text.SimpleDateFormat
+    default-property-inclusion: non_null
+  application:
+    name: service
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.manage.mapper
+  mapper-locations: classpath*:com/manage/mapper/*.xml
+
+logging:
+  # 配置日志文件存储位置
+  file:
+    path: /log
+  # 给dao层设置日志输出等级，设为debug后就可以再控制台看到 sql 输出语句
+  level:
+    com.manage.mapper: TRACE
+  config: classpath:logback-spring.xml
