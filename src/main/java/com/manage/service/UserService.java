@@ -1,7 +1,12 @@
 package com.manage.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.manage.entity.Role;
 import com.manage.entity.User;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author lyq
@@ -24,4 +29,12 @@ public interface UserService extends IService<User> {
      * @return
      */
     User findByUsername(String username);
+
+    /**
+     * 根据用户id查询权限列表
+     * @param userId
+     * @return
+     */
+    String getAuthorityInfo(Integer userId);
+
 }

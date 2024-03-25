@@ -13,28 +13,20 @@ import java.util.List;
 
 /**
  * @author lyq
- * @time 2024/1/26 11:55
+ * @time 2024/3/25 15:14
  */
 
-@TableName("permission")
+@TableName("menu")
 @Data
-public class Permission implements Serializable {
+public class Menu implements Serializable {
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-    @TableField("name")
-    private String name;
-    @TableField("url")
-    private String url;
-    @TableField("method")
-    private String method;
-    @TableField("type")
-    private String type;
-    @TableField("description")
-    private String description;
     @TableField("pid")
     private Integer pid;
-    @TableField("status")
-    private Integer status;
+    @TableField("name")
+    private String name;
+    @TableField("path")
+    private String path;
     @TableField("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
@@ -44,5 +36,5 @@ public class Permission implements Serializable {
     @TableField("create_by")
     private String createBy;
     @TableField(exist = false)
-    private List<Permission> children;
+    private List<Menu> children;
 }

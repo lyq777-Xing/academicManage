@@ -18,4 +18,11 @@ public interface PermissionService extends IService<Permission> {
      * @return List<Permission>
      */
     List<Permission> findByUserId(Integer userId);
+
+    /**
+     * 根据用户id查询权限列表 树形 用于前端展示
+     * @param userId 用户id
+     * @return List<Permission>
+     */
+    List<Permission> findTreeByUserId(Integer userId);
 }

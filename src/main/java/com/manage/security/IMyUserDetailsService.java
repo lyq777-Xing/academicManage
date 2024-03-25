@@ -1,5 +1,6 @@
 package com.manage.security;
 
+import com.manage.common.ResponseResult;
 import com.manage.entity.Permission;
 import com.manage.entity.Role;
 import com.manage.entity.User;
@@ -8,6 +9,7 @@ import com.manage.service.PermissionService;
 import com.manage.service.RoleService;
 import com.manage.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -50,7 +52,7 @@ public class IMyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在");
         }
 
-//        查询已登录用户的权限列表
+/*//        查询已登录用户的权限列表
 //        查询角色
         List<Role> roles = roleService.findRolesByUserId(user.getId());
 //        查询权限
@@ -59,19 +61,31 @@ public class IMyUserDetailsService implements UserDetailsService {
         List<String> authorities = new ArrayList<>();
         for (Role role : roles) {
 //            添加角色 角色名称纳入权限管理，必须增加ROLE_前缀
-            authorities.add("ROLE_" + role.getName());
+            authorities.add("ROLE_" + role.getKey());
         }
         for (Permission permission : permissions) {
 //            添加权限
             authorities.add(permission.getName());
-        }
+        }*/
 
 //        返回UserDetails接口类对象
         return
             new org.springframework.security.core.userdetails.User(
                     user.getUsername(),  //用户名
                     user.getPassword(),  //密码
-                    AuthorityUtils.createAuthorityList(authorities) //权限列表 NO_AUTHORITIES表示没有任何权限 通过方法将字符串泛型的list集合转换为字符串数组
+//                    AuthorityUtils.createAuthorityList(getUserAuthority(user.getId())) //权限列表 NO_AUTHORITIES表示没有任何权限 通过方法将字符串泛型的list集合转换为字符串数组
+                    getUserAuthority(user.getId())
             );
+    }
+
+    /**
+     * 根据用户id查询用户权限
+     * @param id 用户id
+     * @return List<String> 权限列表
+     */
+    public List<GrantedAuthority> getUserAuthority(Integer id){
+        String authority = userService.getAuthorityInfo(id);
+        List<GrantedAuthority> authorityList = AuthorityUtils.commaSeparatedStringToAuthorityList(authority);
+        return authorityList;
     }
 }

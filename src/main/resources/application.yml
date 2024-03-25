@@ -26,3 +26,9 @@ logging:
   level:
     com.manage.mapper: TRACE
   config: classpath:logback-spring.xml
+
+markerhub:
+  jwt:
+    header: Authorization
+    exprie: 604800
+    secret: sderftgyhijnhg67y8u4e3ws27896gt5

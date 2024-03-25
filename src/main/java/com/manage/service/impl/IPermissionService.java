@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,5 +26,20 @@ public class IPermissionService extends ServiceImpl<PermissionMapper, Permission
     @Override
     public List<Permission> findByUserId(Integer userId) {
         return permissionMapper.findByUserId(userId);
+    }
+
+    @Override
+    public List<Permission> findTreeByUserId(Integer userId) {
+        List<Permission> permissions = permissionMapper.findByUserId(userId);
+        for (Permission permission : permissions) {
+            ArrayList<Permission> children = new ArrayList<>();
+            for (Permission child : permissions) {
+                if (child.getPid().equals(permission.getId())) {
+                    children.add(child);
+                }
+            }
+            permission.setChildren(children);
+        }
+        return permissions;
     }
 }

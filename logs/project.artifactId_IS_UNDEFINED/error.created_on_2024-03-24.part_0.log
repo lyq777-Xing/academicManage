@@ -1,0 +1,35 @@
+2024-03-24 00:21:06 | [1;31mERROR[0;39m | [1;33mrestartedMain[0;39m | [1;32morg.springframework.boot.diagnostics.LoggingFailureAnalysisReporter[0;39m | 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  mySecurityConfiguration (field private org.springframework.security.core.userdetails.UserDetailsService com.manage.security.MySecurityConfiguration.userDetailsService)
+↑     ↓
+|  inMemoryUserDetailsManager defined in class path resource [org/springframework/boot/autoconfigure/security/servlet/UserDetailsServiceAutoConfiguration.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2024-03-24 20:13:01 | [1;31mERROR[0;39m | [1;33mrestartedMain[0;39m | [1;32morg.springframework.boot.diagnostics.LoggingFailureAnalysisReporter[0;39m | 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8889 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8889 or configure this application to listen on another port.
+

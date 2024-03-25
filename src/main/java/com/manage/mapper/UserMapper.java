@@ -1,8 +1,11 @@
 package com.manage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.manage.entity.Role;
 import com.manage.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 
 /**
