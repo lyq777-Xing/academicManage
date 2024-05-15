@@ -31,6 +31,7 @@ public class IMenuService extends ServiceImpl<MenuMapper, Menu> implements MenuS
     @Override
     public List<Menu> findByUserId(Integer userId) {
         List<Menu> menuList = menuMapper.findByUserId(userId);
+        ArrayList<Menu> parents = new ArrayList<>();
         for (Menu menu : menuList) {
             if (menu.getPid() == 0) {
                 List<Menu> children = new ArrayList<>();
@@ -40,8 +41,9 @@ public class IMenuService extends ServiceImpl<MenuMapper, Menu> implements MenuS
                     }
                 }
                 menu.setChildren(children);
+                parents.add(menu);
             }
         }
-        return menuList;
+        return parents;
     }
 }

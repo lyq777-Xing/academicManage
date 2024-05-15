@@ -45,10 +45,12 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         Claims claimByToken = jwtUtils.getClaimByToken(header);
         if(claimByToken == null){
+            request.getSession().invalidate(); //清空session会话
             throw new JwtException("token 异常");
         }
 
         if(jwtUtils.isTokenExpired(claimByToken)){
+            request.getSession().invalidate(); //清空session会话
             throw new JwtException("token已过期");
         }
 

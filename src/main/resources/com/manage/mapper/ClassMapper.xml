@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manage.mapper.ClassMapper">
+    <select id="findAllClasses" resultType="com.manage.entity.Course">
+        SELECT c.`id`,c.`name`,c.`college_id`,co.`name` AS collegeName,c.`create_time`,c.`update_time`
+        FROM class AS c
+            LEFT JOIN college AS co ON c.`college_id` = co.`id`
+        where c.`name` like concat('%',#{query},'%')
+            OR co.`name` like concat('%',#{query},'%')
+    </select>
+    <select id="selectEcharts" resultType="com.manage.entity.Course">
+    SELECT college_id AS collegeId,COUNT(*) AS eChart FROM class GROUP BY college_id
+    </select>
+</mapper>

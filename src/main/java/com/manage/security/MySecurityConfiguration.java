@@ -163,7 +163,7 @@ public class MySecurityConfiguration extends SecurityConfigurerAdapter<DefaultSe
           注意 此方法必须在最后调用 放在前面会影响权限校验
          */
         security.authorizeRequests()
-                .requestMatchers("/login","/loginFail").permitAll() //登录页面不需要认证
+                .requestMatchers("/login","/loginFail","/v3/api-docs","/swagger-ui/*","/swagger-ui.html").permitAll() //登录页面不需要认证
                 .requestMatchers("/logout").authenticated() //退出登录页面需要认证
 //                .requestMatchers("/lyq/test").hasRole("SuperAdmin") //指定的请求需要指定的角色
 //                .requestMatchers("/lyq/test").hasAuthority("user:add") //指定的请求需要指定的权限

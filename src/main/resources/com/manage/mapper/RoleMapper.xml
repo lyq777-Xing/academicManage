@@ -10,4 +10,15 @@
             ON r.`id` = ur.`role_id`
         WHERE ur.`user_id` = #{userId}
     </select>
+
+    <select id="findAllRoles" resultType="com.manage.entity.Role">
+        SELECT *
+        FROM role
+    </select>
+
+<select id="findAllRolesPage" resultType="com.manage.entity.Role">
+    SELECT *
+    FROM role
+    where `name` like concat('%',#{query},'%')
+</select>
 </mapper>

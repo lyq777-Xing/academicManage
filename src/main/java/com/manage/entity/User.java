@@ -30,10 +30,28 @@ public class User implements Serializable {
     private String phone;
     @TableField("introduce")
     private String introduce;
+    @TableField("class_id")
+    private Integer classId;
+    @TableField(exist = false)
+    private String className;
+    @TableField("college_id")
+    private Integer collegeId;
+    @TableField(exist = false)
+    private String collegeName;
+    @TableField(exist = false)
+    private Integer roleId;
+    @TableField(exist = false)
+    private String roleName;
     @TableField("create_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
     @TableField("update_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
+    @TableField(exist = false)
+    private String teacherName;
+    @TableField(exist = false)
+    private Integer teacherId;
+    @TableField(exist = false)
+    private double score;
 }
